@@ -40,6 +40,7 @@ namespace Egzas_Databasu.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Age = table.Column<int>(type: "int", nullable: false),
                     DepartmentId = table.Column<int>(type: "int", nullable: true),
+                    Pavarde = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>

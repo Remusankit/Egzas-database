@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Egzas_Databasu.Migrations
 {
     [DbContext(typeof(StudentsDbContext))]
-    [Migration("20220713174821_Mi_1")]
-    partial class Mi_1
+    [Migration("20220718173330_Mi_3")]
+    partial class Mi_3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,6 +58,9 @@ namespace Egzas_Databasu.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Kelintas")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -79,7 +82,13 @@ namespace Egzas_Databasu.Migrations
                     b.Property<int?>("DepartmentId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Iq_lygis")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pavarde")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

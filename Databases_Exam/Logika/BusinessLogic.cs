@@ -16,16 +16,16 @@ namespace Egzas_Databasu
             _repository.AddDepartment(department);
             _repository.SaveChanges();
         }
-        public void CreateLecture(string name)
+        public void CreateLecture(string name, int kelint)
         {
-            var lecture = new Lecture(name);
+            var lecture = new Lecture(name, kelint);
 
             _repository.AddLecture(lecture);
             _repository.SaveChanges();
         }
-        public void CreateStudent(string name, int age)
+        public void CreateStudent(string name, int age,string pavard,int iq)
         {
-            var student = new Student(name, age);
+            var student = new Student(name, age, pavard,iq);
 
             _repository.AddStudent(student);
             _repository.SaveChanges();

@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Drawing;
+using System.Threading;
+using Console = Colorful.Console;
 
 namespace Egzas_Databasu
 {
@@ -12,7 +15,26 @@ namespace Egzas_Databasu
 
         public void Controls()
         {
-            Console.WriteLine("University database");
+            Console.Title = "Uni Database";
+            string title = @"
+ /\ /\ _ __ (_)_   _____ _ __ ___(_) |_ _   _ 
+/ / \ \ '_ \| \ \ / / _ \ '__/ __| | __| | | |
+\ \_/ / | | | |\ V /  __/ |  \__ \ | |_| |_| |
+ \___/|_| |_|_| \_/ \___|_|  |___/_|\__|\__, |
+                                        |___/ 
+    ___      _        _                       
+   /   \__ _| |_ __ _| |__   __ _ ___  ___    
+  / /\ / _` | __/ _` | '_ \ / _` / __|/ _ \   
+ / /_// (_| | || (_| | |_) | (_| \__ \  __/   
+/___,' \__,_|\__\__,_|_.__/ \__,_|___/\___|   ";
+            Console.WriteLine(title);
+            for (int i = 0; i <= 100; i++)
+            {
+                Console.Write($"\rProgress: {i}%   ");
+                Thread.Sleep(25);
+            }
+
+            Console.Write("\rDone!          ");
             Console.ReadLine();
 
             bool repeat = true;
@@ -21,7 +43,15 @@ namespace Egzas_Databasu
             while (repeat)
             {
                 Console.Clear();
-                Console.WriteLine("MENIU\n[1]-Add Department, Student or Lecture" +
+                Console.Title = "Menu_1";
+                string menu = @" 
+  /\/\   ___ _ __  _   _ 
+ /    \ / _ \ '_ \| | | |
+/ /\/\ \  __/ | | | |_| |
+\/    \/\___|_| |_|\__,_|
+ ";
+                Console.WriteLine(menu);
+                Console.WriteLine("[1]-Add Department, Student or Lecture " +
                     "\n[2]-See All Departments, Students or Lectures" +
                     "\n[3]-Show By Department, Student or Lecture" +
                     "\n[4]-Assign Department, Student or Lecture" +
@@ -57,7 +87,7 @@ namespace Egzas_Databasu
                         break;
                     default:
                         Console.Clear();
-                        Console.WriteLine("Wrong input");
+                        Console.WriteLine("Wrong input", Color.Red);
                         Console.ReadLine();
                         break;
                 }
@@ -71,7 +101,7 @@ namespace Egzas_Databasu
             while (repeat)
             {
                 Console.Clear();
-                Console.WriteLine("Select what do you want to add:\n[1]-Department\n[2]-Lecture\n[3]-Student\n[4]-Return");
+                Console.WriteLine("Select what do you want to add:\n[1]-Department \n[2]-Lecture\n[3]-Student\n[4]-Return");
                 userInput = Console.ReadLine();
 
                 switch (userInput)
@@ -86,7 +116,9 @@ namespace Egzas_Databasu
                         Console.Clear();
                         Console.WriteLine("Enter lectures's name:");
                         string lectureName = Console.ReadLine();
-                        _businessLogic.CreateLecture(lectureName);
+                        Console.WriteLine("Enter lectures's number:");
+                        int kelint = Int32.Parse(Console.ReadLine());
+                        _businessLogic.CreateLecture(lectureName,kelint);
                         break;
                     case "3":
                         Console.Clear();
@@ -94,7 +126,11 @@ namespace Egzas_Databasu
                         string studentName = Console.ReadLine();
                         Console.WriteLine("Enter student's age:");
                         int age = Int32.Parse(Console.ReadLine());
-                        _businessLogic.CreateStudent(studentName, age);
+                        Console.WriteLine("Enter student's surename:");
+                        string pavard = Console.ReadLine();
+                        Console.WriteLine("Enter student's iq:");
+                        int iq = Int32.Parse(Console.ReadLine());
+                        _businessLogic.CreateStudent(studentName, age, pavard,iq);
                         break;
                     case "4":
                         Console.Clear();
@@ -103,7 +139,7 @@ namespace Egzas_Databasu
                         break;
                     default:
                         Console.Clear();
-                        Console.WriteLine("Wrong input, try again");
+                        Console.WriteLine("Wrong input, try again", Color.Red);
                         Console.ReadLine();
                         break;
                 }
@@ -144,7 +180,7 @@ namespace Egzas_Databasu
                         break;
                     default:
                         Console.Clear();
-                        Console.WriteLine("Wrong input, try again");
+                        Console.WriteLine("Wrong input, try again", Color.Red);
                         Console.ReadLine();
                         break;
                 }
@@ -244,7 +280,7 @@ namespace Egzas_Databasu
                         break;
                     default:
                         Console.Clear();
-                        Console.WriteLine("Wrong input, try again");
+                        Console.WriteLine("Wrong input, try again", Color.Red);
                         Console.ReadLine();
                         break;
                 }
@@ -306,7 +342,7 @@ namespace Egzas_Databasu
                         break;
                     default:
                         Console.Clear();
-                        Console.WriteLine("Wrong input, try again");
+                        Console.WriteLine("Wrong input, try again", Color.Red);
                         Console.ReadLine();
                         break;
                 }
@@ -359,7 +395,7 @@ namespace Egzas_Databasu
                         break;
                     default:
                         Console.Clear();
-                        Console.WriteLine("Wrong input, try again");
+                        Console.WriteLine("Wrong input, try again", Color.Red);
                         Console.ReadLine();
                         break;
                 }
@@ -367,7 +403,7 @@ namespace Egzas_Databasu
         }
         public int GetDepartmentId()
         {
-            Console.WriteLine("Enter department's ID:");
+            Console.WriteLine("Enter department's ID:", Color.Blue);
 
             _businessLogic.ShowDepartments();
 
@@ -377,7 +413,7 @@ namespace Egzas_Databasu
         }
         public int GetLectureId()
         {
-            Console.WriteLine("Enter lecture's ID:");
+            Console.WriteLine("Enter lecture's ID:", Color.Yellow);
 
             _businessLogic.ShowLectures();
 
@@ -387,7 +423,7 @@ namespace Egzas_Databasu
         }
         public int GetStudentId()
         {
-            Console.WriteLine("Enter student's ID:");
+            Console.WriteLine("Enter student's ID:", Color.Green);
 
             _businessLogic.ShowStudents();
             Console.WriteLine();
@@ -395,6 +431,6 @@ namespace Egzas_Databasu
             return Int32.Parse(Console.ReadLine());
         }
     }
-    
-    
+
+
 }
